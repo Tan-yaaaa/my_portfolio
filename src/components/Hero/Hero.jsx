@@ -1,5 +1,5 @@
 import { useState, useEffect } from "react";
-import { FaDownload, FaEye, FaCheck, FaTimes } from "react-icons/fa";
+import { FaDownload, FaCertificate, FaCheck, FaTimes } from "react-icons/fa";
 import "./Hero.css";
 
 const Hero = () => {
@@ -12,10 +12,8 @@ const Hero = () => {
   const [downloadComplete, setDownloadComplete] = useState(false);
   const [downloadError, setDownloadError] = useState(false);
 
-  // ✅ Correct resume links
-  //const resumeDownloadUrl = '/my_portfoilo/tanya resume.pdf'
-const resumeViewUrl = '/my_portfolio/tanya resume.pdf'
-
+  const resumeDownloadUrl = '/tanya resume.pdf';
+  const resumeViewUrl = 'https://drive.google.com/file/d/1E8LByQkYFzMe4KrQtiS_vHjo8GMm9i70/view?usp=share_link';
 
   const codeLines = [
     "// Software Developer",
@@ -40,7 +38,6 @@ const resumeViewUrl = '/my_portfolio/tanya resume.pdf'
   useEffect(() => {
     if (currentLine < codeLines.length) {
       const currentText = codeLines[currentLine];
-
       if (charIndex < currentText.length) {
         const timeout = setTimeout(() => {
           setDisplayedText((prev) => prev + currentText[charIndex]);
@@ -65,7 +62,6 @@ const resumeViewUrl = '/my_portfolio/tanya resume.pdf'
     }
   }, [currentLine, charIndex]);
 
-  // ✅ FIXED simulate download function
   const simulateDownloadProgress = () => {
     setIsDownloading(true);
     setDownloadComplete(false);
@@ -78,10 +74,7 @@ const resumeViewUrl = '/my_portfolio/tanya resume.pdf'
           clearInterval(interval);
           return 100;
         }
-
-        const increment =
-          prev < 70 ? Math.random() * 15 + 5 : Math.random() * 5 + 1;
-
+        const increment = prev < 70 ? Math.random() * 15 + 5 : Math.random() * 5 + 1;
         return Math.min(prev + increment, 100);
       });
     }, 200);
@@ -135,7 +128,6 @@ const resumeViewUrl = '/my_portfolio/tanya resume.pdf'
         </>
       );
     }
-
     if (downloadError) {
       return (
         <>
@@ -144,7 +136,6 @@ const resumeViewUrl = '/my_portfolio/tanya resume.pdf'
         </>
       );
     }
-
     if (isDownloading) {
       return (
         <>
@@ -153,7 +144,6 @@ const resumeViewUrl = '/my_portfolio/tanya resume.pdf'
         </>
       );
     }
-
     return (
       <>
         <FaDownload className="btn-icon" />
@@ -170,22 +160,18 @@ const resumeViewUrl = '/my_portfolio/tanya resume.pdf'
             <h1 className="hero-title">
               Designing <span className="gradient-text">Digital Experiences</span>
             </h1>
-
             <p className="hero-subtitle">
               Creative Developer & Technical Problem Solver
             </p>
-
             <p className="hero-description">
               Transforming complex challenges into elegant, scalable solutions
               through modern technology and innovative development approaches.
             </p>
-
             <div className="hero-actions-left">
-              <a href="#projects" className="btn btn-secondary">
-                <FaEye className="btn-icon" />
-                View Projects
+              <a href="#certificates" className="btn btn-secondary">
+                <FaCertificate className="btn-icon" />
+                View Certificates
               </a>
-
               <button
                 onClick={handleResumeAction}
                 className={`btn btn-secondary download-btn ${
@@ -197,7 +183,6 @@ const resumeViewUrl = '/my_portfolio/tanya resume.pdf'
               >
                 {getButtonContent()}
               </button>
-
               {(isDownloading || downloadComplete) && (
                 <div className="download-progress-container">
                   <div
@@ -208,7 +193,6 @@ const resumeViewUrl = '/my_portfolio/tanya resume.pdf'
               )}
             </div>
           </div>
-
           <div className="hero-right-section">
             <div className="code-window-container">
               <div className="code-window">
@@ -246,5 +230,3 @@ const resumeViewUrl = '/my_portfolio/tanya resume.pdf'
 };
 
 export default Hero;
-
-
